@@ -21,6 +21,7 @@ export const ChatWindow = () => {
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
   // Function to automatically scroll to the bottom
   const scrollToBottom = () => {
@@ -29,10 +30,26 @@ export const ChatWindow = () => {
   // Reference for auto-scrolling
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // File upload code
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
+    const file = e.target.files ? e.target.files[0] : null;
+
+    if (file) {
+      setSelectedFile(file);
+
+      // Create a FileReader instance
+      const reader = new FileReader();
+
+      // Set the function to run when the file is done loading
+      reader.onloadend = () => {
+        setImagePreviewUrl(reader.result as string);
+      };
+
+      // Read the file as a Data URL
+      reader.readAsDataURL(file);
+    } else {
+      // If the file selection is cleared
+      setSelectedFile(null);
+      setImagePreviewUrl(null);
     }
   };
 
@@ -51,7 +68,7 @@ export const ChatWindow = () => {
     e.preventDefault();
     if ((!input.trim() && !selectedFile) || isAILoading) return;
 
-    // 1. Prepare data for the API
+    // Prepare data for the API
     let base64Image: string | undefined;
     if (selectedFile) {
       const base64String = await fileToBase64(selectedFile);
@@ -62,7 +79,7 @@ export const ChatWindow = () => {
     setInput("");
     setIsAILoading(true);
 
-    // 1. Add user message to state
+    // Add user message to state
     const newUserMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -81,7 +98,7 @@ export const ChatWindow = () => {
         content: msg.content,
       }));
 
-      // 2. Call your internal API Route
+      // Call your internal API Route
       const response = await axios.post("/api/chat", {
         history: historyForAPI,
         prompt: userInput,
@@ -90,7 +107,7 @@ export const ChatWindow = () => {
       });
       const aiText = response.data.text;
 
-      // 3. Add the AI response message to state
+      // Add the AI response message to state
       const newAIMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "model",
@@ -149,23 +166,40 @@ export const ChatWindow = () => {
               click={isAILoading || !input.trim()}
             />
           )}
-          {/* file upload Button  */}
-          <label className="px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none bg-blue-600 hover:bg-blue-700">
-            <FiImage className="text-2xl" />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-              disabled={isAILoading}
-            />
-          </label>
-
-          {/* Display selected file name if present */}
-          {selectedFile && (
-            <span className="text-sm text-gray-500 truncate max-w-[100px]">
-              {selectedFile.name}
+          {/* Display the File Upload Button And Image */}
+          {selectedFile ? (
+            <span>
+              {imagePreviewUrl && (
+                <div className="relative">
+                  <img
+                    src={imagePreviewUrl}
+                    alt="Image Preview"
+                    className="w-16 h-16 object-cover rounded-md"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedFile(null);
+                      setImagePreviewUrl(null);
+                    }}
+                    className="absolute -top-1 -right-1 bg-red-500 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center shadow-lg"
+                  >
+                    &times;
+                  </button>
+                </div>
+              )}
             </span>
+          ) : (
+            <label className="px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none bg-blue-600 hover:bg-blue-700">
+              <FiImage className="text-2xl" />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+                disabled={isAILoading}
+              />
+            </label>
           )}
         </form>
       </div>
