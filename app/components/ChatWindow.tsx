@@ -126,7 +126,6 @@ export const ChatWindow = () => {
     } finally {
       setIsAILoading(false);
       setSelectedFile(null);
-      // Scroll after the response is received
       setTimeout(scrollToBottom, 100);
     }
   };
@@ -157,7 +156,7 @@ export const ChatWindow = () => {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything..."
             disabled={isAILoading}
-            className="flex-1 p-3 border border-blue-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="flex-1 p-3 border border-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
           {/* Submit Button  */}
           {input.trim().length > 0 && (
