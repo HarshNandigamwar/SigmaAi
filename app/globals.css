@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* For Webkit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px; /* very thin */
+  height: 6px; /* horizontal scrollbar if any */
+}
+::-webkit-scrollbar-track {
+  background: transparent; /* hide the track */
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1); /* almost invisible */
+  border-radius: 10px;
+}
+/* Optional: hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
