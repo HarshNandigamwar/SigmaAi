@@ -54,10 +54,7 @@ export const ChatWindow = () => {
     // 1. Prepare data for the API
     let base64Image: string | undefined;
     if (selectedFile) {
-      // Convert file to Base64 string
       const base64String = await fileToBase64(selectedFile);
-      // The result starts with "data:image/jpeg;base64,...",
-      // we only need the part after the comma.
       base64Image = base64String.split(",")[1];
     }
 
@@ -88,6 +85,8 @@ export const ChatWindow = () => {
       const response = await axios.post("/api/chat", {
         history: historyForAPI,
         prompt: userInput,
+        image: base64Image,
+        mimeType: selectedFile?.type,
       });
       const aiText = response.data.text;
 
@@ -109,6 +108,7 @@ export const ChatWindow = () => {
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsAILoading(false);
+      setSelectedFile(null);
       // Scroll after the response is received
       setTimeout(scrollToBottom, 100);
     }
