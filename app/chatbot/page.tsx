@@ -3,10 +3,10 @@
 import React, { useState, useRef } from "react";
 import { FiImage } from "react-icons/fi";
 import axios from "axios";
-import SubmitButton from "./SubmitButton";
-import Loader from "./Loader";
-import Header from "./Header";
-import MessageBox from "./MessageBox";
+import SubmitButton from "../components/SubmitButton";
+import Loader from "../components/Loader";
+import Header from "../components/Header";
+import MessageBox from "../components/MessageBox";
 
 export type Role = "user" | "model";
 export interface Message {
@@ -16,7 +16,7 @@ export interface Message {
   isLoading?: boolean;
 }
 
-export const ChatWindow = () => {
+ const ChatWindow = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
@@ -205,3 +205,4 @@ export const ChatWindow = () => {
     </div>
   );
 };
+export default ChatWindow;
