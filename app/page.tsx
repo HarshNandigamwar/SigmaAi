@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { ChatWindow } from "./components/ChatWindow";
-
+import HomePage from "./home/page";
 export default function Home() {
- return (
+  return (
     <main className="h-screen">
-      <ChatWindow />
+      <HomePage />
     </main>
   );
 }
