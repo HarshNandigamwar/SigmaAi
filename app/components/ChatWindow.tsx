@@ -2,10 +2,11 @@
 
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 import SubmitButton from "./SubmitButton";
 import Loader from "./Loader";
 import Header from "./Header";
+import MessageBox from "./MessageBox";
 
 export type Role = "user" | "model";
 export interface Message {
@@ -15,42 +16,19 @@ export interface Message {
   isLoading?: boolean;
 }
 
-// Utility component for message display
-const ChatMessage: React.FC<{ message: Message }> = ({ message }) => {
-  const isUser = message.role === "user";
-  const baseClasses =
-    "max-w-[70%] p-3 rounded-xl shadow-md my-2 whitespace-pre-wrap";
-
-  // Tailwind classes for modern, distinct bubbles
-  const userClasses = "bg-blue-600 text-white ml-auto rounded-br-none";
-  const modelClasses = "bg-gray-100 text-gray-800 mr-auto rounded-tl-none";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`flex ${isUser ? "justify-end" : "justify-start"}`}
-    >
-      <div className={`${baseClasses} ${isUser ? userClasses : modelClasses}`}>
-        {message.content}
-      </div>
-    </motion.div>
-  );
-};
-
 export const ChatWindow = () => {
   const [messages, setMessages] = useState<Message[]>([]);
+//   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
-
-  // Ref for auto-scrolling
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Function to automatically scroll to the bottom
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  // Reference for auto-scrolling
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   //** logic for handleSend **
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,11 +93,14 @@ export const ChatWindow = () => {
       {/* Header*/}
       <Header />
 
-      {/* Chat Area */}
+      {/* Chat Display */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {messages.map((message) => (
-          <ChatMessage key={message.id} message={message} />
+          <MessageBox key={message.id} message={message} />
         ))}
+        {/* {messages.map((message) => (
+          <ChatMessage key={message.id} message={message} />
+        ))} */}
 
         {/* Display Loader for Response */}
         {isAILoading && <Loader />}
