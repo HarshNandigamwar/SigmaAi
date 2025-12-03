@@ -13,8 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sigma-AI",
-  description: " Intelligent Conversations, Unleashed.",
+  title: "Sigma-AI |  Intelligent Conversations, Unleashed.",
 };
 
 export default function RootLayout({
