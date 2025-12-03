@@ -49,7 +49,17 @@ export const ChatWindow = () => {
   // logic for handleSend
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isAILoading) return;
+    if ((!input.trim() && !selectedFile) || isAILoading) return;
+
+    // 1. Prepare data for the API
+    let base64Image: string | undefined;
+    if (selectedFile) {
+      // Convert file to Base64 string
+      const base64String = await fileToBase64(selectedFile);
+      // The result starts with "data:image/jpeg;base64,...",
+      // we only need the part after the comma.
+      base64Image = base64String.split(",")[1];
+    }
 
     const userInput = input.trim();
     setInput("");
