@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const Loader = () => {
-  return (
+  return (  
     <div className="flex justify-start">
       <div className="max-w-[70%] p-3 my-2">
         <Skeleton
