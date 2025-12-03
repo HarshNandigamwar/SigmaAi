@@ -12,33 +12,42 @@ export async function POST(req: NextRequest) {
   try {
     const { history, prompt, image, mimeType } = await req.json();
 
+    // 1. Map history past turns correctly
     const contents: Content[] = history.map((msg: ClientMessage) => ({
       role: msg.role,
       parts: [{ text: msg.content } as Part],
     }));
 
-    // Create the parts array for the current message
+    // Create the parts array for the CURRENT message
     const currentMessageParts: Part[] = [];
 
-    // 1. Add image part if provided
+    // 2. Add image part if provided
     if (image && mimeType) {
       currentMessageParts.push({
         inlineData: {
-          data: image, // Base64 string
+          data: image,
           mimeType: mimeType,
         },
       });
     }
 
-    contents.push({
-      role: "user",
-      parts: [{ text: prompt } as Part],
-    });
+    // 3. Add text part if provided
+    if (prompt) {
+      currentMessageParts.push({ text: prompt });
+    }
+
+    // 4. COMBINE all current parts into a single 'user' Content object
+    if (currentMessageParts.length > 0) {
+      contents.push({
+        role: "user",
+        parts: currentMessageParts, // This array contains both text and image parts
+      });
+    }
 
     // Call the Gemini API
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: contents,
+      contents: contents, // This now includes the single, combined multimodal turn
     });
 
     // Return the response text
