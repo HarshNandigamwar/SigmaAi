@@ -35,6 +35,17 @@ export const ChatWindow = () => {
       setSelectedFile(e.target.files[0]);
     }
   };
+
+  // Convert Image file into  Base64 encoded string
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   // logic for handleSend
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
