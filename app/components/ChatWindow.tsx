@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import { FiImage } from "react-icons/fi";
 import axios from "axios";
-// import { motion, AnimatePresence } from "framer-motion";
 import SubmitButton from "./SubmitButton";
 import Loader from "./Loader";
 import Header from "./Header";
@@ -18,9 +18,9 @@ export interface Message {
 
 export const ChatWindow = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-//   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Function to automatically scroll to the bottom
   const scrollToBottom = () => {
@@ -29,7 +29,13 @@ export const ChatWindow = () => {
   // Reference for auto-scrolling
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  //** logic for handleSend **
+  // File upload code
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+  // logic for handleSend
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isAILoading) return;
@@ -45,14 +51,13 @@ export const ChatWindow = () => {
       content: userInput,
     };
 
-    // We update state directly to avoid race conditions with the API call
+    // update state directly to avoid race conditions with the API call
     setMessages((prev) => [...prev, newUserMessage]);
 
     // Scroll immediately after adding the user message
     setTimeout(scrollToBottom, 0);
 
     try {
-      // Prepare history for the API (only need role and content for the backend)
       const historyForAPI = messages.map((msg) => ({
         role: msg.role,
         content: msg.content,
@@ -98,9 +103,6 @@ export const ChatWindow = () => {
         {messages.map((message) => (
           <MessageBox key={message.id} message={message} />
         ))}
-        {/* {messages.map((message) => (
-          <ChatMessage key={message.id} message={message} />
-        ))} */}
 
         {/* Display Loader for Response */}
         {isAILoading && <Loader />}
@@ -109,7 +111,7 @@ export const ChatWindow = () => {
 
       {/* Input and Submit */}
       <div className="p-4 bg-[#1e1e1e]">
-        <form onSubmit={handleSend} className="flex space-x-3">
+        <form onSubmit={handleSend} className="flex space-x-3 items-center">
           {/* Input */}
           <input
             type="text"
@@ -125,6 +127,24 @@ export const ChatWindow = () => {
               loading={isAILoading}
               click={isAILoading || !input.trim()}
             />
+          )}
+          {/* file upload Button  */}
+          <label className="px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none bg-blue-600 hover:bg-blue-700">
+            <FiImage className="text-2xl" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+              disabled={isAILoading}
+            />
+          </label>
+
+          {/* Display selected file name if present */}
+          {selectedFile && (
+            <span className="text-sm text-gray-500 truncate max-w-[100px]">
+              {selectedFile.name}
+            </span>
           )}
         </form>
       </div>
