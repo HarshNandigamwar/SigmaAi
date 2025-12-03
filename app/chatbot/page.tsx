@@ -16,7 +16,7 @@ export interface Message {
   isLoading?: boolean;
 }
 
- const ChatWindow = () => {
+const ChatWindow = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
