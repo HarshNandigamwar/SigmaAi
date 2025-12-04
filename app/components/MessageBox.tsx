@@ -54,7 +54,7 @@ const MessageBox: React.FC<{ message: Message }> = ({ message }) => {
         >
           {message.content}
           <p
-            className={`text-xs flex justify-end p-1 mt-1 ${
+            className={`text-xs flex items-center justify-end p-1 mt-1 ${
               isUser ? "text-blue-200" : "text-gray-400"
             }`}
           >

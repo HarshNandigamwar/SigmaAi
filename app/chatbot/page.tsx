@@ -71,8 +71,7 @@ const ChatWindow = () => {
     e.preventDefault();
     if ((!input.trim() && !selectedFile) || isAILoading) return;
 
-
-    const now = new Date().toISOString()
+    const now = new Date().toISOString();
 
     // Prepare data for the API
     let base64Image: string | undefined;
