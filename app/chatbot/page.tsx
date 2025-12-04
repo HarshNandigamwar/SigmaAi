@@ -7,6 +7,7 @@ import SubmitButton from "../components/SubmitButton";
 import Loader from "../components/Loader";
 import Header from "../components/Header";
 import MessageBox from "../components/MessageBox";
+import { useScrollToBottom } from "../util/useScrollToBottom";
 
 export type Role = "user" | "model";
 export interface Message {
@@ -17,6 +18,7 @@ export interface Message {
 }
 
 const ChatWindow = () => {
+  useScrollToBottom()
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
