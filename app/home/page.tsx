@@ -6,7 +6,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa6";
 import Footer from "../components/Footer";
 const page: React.FC = () => {
   const gradientTextClass =
-    "text-6xl md:text-7xl font-extrabold tracking-tight " +
+    "p-2 text-6xl md:text-7xl font-extrabold tracking-tight " +
     "bg-clip-text text-transparent mb-2 " +
     "bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-600";
   const buttonClass =
