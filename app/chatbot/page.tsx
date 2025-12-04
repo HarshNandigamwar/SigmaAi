@@ -144,7 +144,7 @@ const ChatWindow = () => {
         ))}
 
         {/* Display Loader for Response */}
-        {!isAILoading && <Loader />}
+        {isAILoading && <Loader />}
         <div ref={messagesEndRef} />
       </div>
 
