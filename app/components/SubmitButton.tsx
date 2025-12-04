@@ -14,7 +14,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ loading, click }) => {
       whileTap={{ scale: 0.95, y: 1, boxShadow: "0 0 0 0" }}
       type="submit"
       disabled={click}
-      className={`px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none ${
+      className={`px-3 md:px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none ${
         loading
           ? "bg-blue-400 cursor-not-allowed"
           : "bg-blue-600 hover:bg-blue-700"

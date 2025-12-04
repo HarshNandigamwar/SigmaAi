@@ -131,7 +131,7 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#1a1a1a]">
+    <div className="flex h-screen flex-col bg-[#1a1a1a]">
       {/* Header*/}
       <Header />
 
@@ -147,14 +147,17 @@ const ChatWindow = () => {
       </div>
 
       {/* Input and Submit */}
-      <div className="p-4 bg-[#1e1e1e]">
-        <form onSubmit={handleSend} className="flex space-x-3 items-center">
+      <div className="p-2 md:p-4 bg-[#1e1e1e] md:flex md:justify-center ">
+        <form
+          onSubmit={handleSend}
+          className="flex space-x-2 md:space-x-3 items-center md:w-2xl "
+        >
           {/* Input */}
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything..."
+            placeholder="Ask me anything . . ."
             disabled={isAILoading}
             className="flex-1 p-3 border border-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
@@ -173,7 +176,7 @@ const ChatWindow = () => {
                   <img
                     src={imagePreviewUrl}
                     alt="Image Preview"
-                    className="w-16 h-16 object-cover rounded-md"
+                    className="w-11 h-11 md:w-16 md:h-16 object-cover rounded-md"
                   />
                   <button
                     type="button"
@@ -189,7 +192,7 @@ const ChatWindow = () => {
               )}
             </span>
           ) : (
-            <label className="px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none bg-blue-600 hover:bg-blue-700">
+            <label className="px-3 md:px-6 py-3 text-white font-semibold rounded-lg shadow-xl transition-colors focus:outline-none bg-blue-600 hover:bg-blue-700">
               <FiImage className="text-2xl" />
               <input
                 type="file"

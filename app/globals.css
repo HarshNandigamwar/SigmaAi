@@ -23,26 +23,22 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
-/* For Webkit browsers (Chrome, Edge, Safari) */
+/* For Webkit browsers (Chrome, Edge, Safari, Firefox) */
 ::-webkit-scrollbar {
-  width: 6px; /* very thin */
-  height: 6px; /* horizontal scrollbar if any */
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent; /* hide the track */
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1); /* almost invisible */
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
-/* Optional: hover effect */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-/* For Firefox */
 * {
-  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
