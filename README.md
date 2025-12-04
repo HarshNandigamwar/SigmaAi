@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Sigma-AI   
+A powerful, multimodal AI chat application built with modern web technologies, enabling **real-time conversations** and **image-based analysis**.
 
-## Getting Started
+---
 
-First, run the development server:
+## ✨ Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 💬 Core Chat Functionality
+- **Real-time Interaction**: Fast and responsive conversations powered by the **Gemini API**.
+- **Contextual History**: Maintains full dialogue context for smooth, continuous interactions.
+- **Formatted Timestamps**: Automatically formats timestamps to `YYYY-MM-DD HH:MM AM/PM`.
+- **Loading State**: Displays a clear loader while AI processes the request.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🖼️ Multimodal Capabilities (Image Upload)
+- **Image Analysis**: Supports uploading `.jpg`, `.jpeg`, `.png`, and processes them with text prompts.
+- **Live Preview**: Shows a removable preview of the selected image before sending.
+- **Base64 Conversion**: Securely converts images to Base64 client-side before sending to the backend for multimodal processing.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### 🎨 Modern UI/UX
+- **Dark Mode Focused**: Clean, high-contrast interface designed for comfortable viewing.
+- **Fully Responsive**: Works flawlessly across mobile, tablets, and desktop screens.
+- **Smooth Transitions**: Powered by **Framer Motion** for sleek message animations.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Technology Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Category      | Technology        | Purpose |
+|---------------|-------------------|---------|
+| Framework     | **Next.js** | Server-side rendering + API routes |
+| Language      | **TypeScript**    | Type safety & improved maintainability |
+| Styling       | **Tailwind CSS**  | Utility-first responsive UI |
+| State/UI      | **React Hooks**   | State and component management |
+| Animation     | **Framer Motion** | Smooth message entry animations |
+| API Client    | **Axios**         | For calling `/api/chat` backend route |
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
