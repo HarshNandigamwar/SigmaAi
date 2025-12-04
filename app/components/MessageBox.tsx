@@ -12,7 +12,7 @@ const MessageBox: React.FC<{ message: Message }> = ({ message }) => {
   const baseClasses =
     "max-w-[70%] p-3 rounded-xl shadow-md my-2 whitespace-pre-wrap";
   const userClasses = "bg-blue-600 text-white ml-auto rounded-br-none";
-  const modelClasses = "bg-gray-100 text-gray-800 mr-auto rounded-tl-none";
+  const modelClasses = "bg-[#2a2a2a] text-white mr-auto rounded-tl-none";
 
   return (
     <>

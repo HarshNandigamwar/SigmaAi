@@ -18,7 +18,7 @@ export interface Message {
 }
 
 const ChatWindow = () => {
-  useScrollToBottom()
+  useScrollToBottom();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isAILoading, setIsAILoading] = useState(false);
@@ -139,6 +139,17 @@ const ChatWindow = () => {
 
       {/* Chat Display */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        {/* Hello Message from bot */}
+        <div>
+          <p className={`mb-0 underline text-gray-400 flex justify-start`}>
+            Sigma AI
+          </p>
+          <div className="flex justify-start max-w-[70%] p-3 rounded-xl shadow-md my-2 whitespace-pre-wrap bg-[#2a2a2a] text-white mr-auto rounded-tl-none ">
+            Hey there 👋
+            <br />
+            Welcome to Sigma AI 🤖
+          </div>
+        </div>
         {messages.map((message) => (
           <MessageBox key={message.id} message={message} />
         ))}
