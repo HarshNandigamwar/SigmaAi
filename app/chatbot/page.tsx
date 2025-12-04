@@ -15,6 +15,7 @@ export interface Message {
   role: Role;
   content: string;
   isLoading?: boolean;
+  timestamp: string;
 }
 
 const ChatWindow = () => {
@@ -31,7 +32,7 @@ const ChatWindow = () => {
   };
   // Reference for auto-scrolling
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
+  // File Operation
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
 
@@ -70,6 +71,9 @@ const ChatWindow = () => {
     e.preventDefault();
     if ((!input.trim() && !selectedFile) || isAILoading) return;
 
+
+    const now = new Date().toISOString()
+
     // Prepare data for the API
     let base64Image: string | undefined;
     if (selectedFile) {
@@ -86,6 +90,7 @@ const ChatWindow = () => {
       id: Date.now().toString(),
       role: "user",
       content: userInput,
+      timestamp: now,
     };
 
     // update state directly to avoid race conditions with the API call
@@ -110,19 +115,23 @@ const ChatWindow = () => {
       const aiText = response.data.text;
 
       // Add the AI response message to state
+      const aiResponseTime = new Date().toISOString();
       const newAIMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "model",
         content: aiText,
+        timestamp: aiResponseTime,
       };
       setMessages((prev) => [...prev, newAIMessage]);
     } catch (error) {
       console.error("Frontend Axios Error:", error);
+      const aiResponseTime = new Date().toISOString();
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "model",
-        content: "Sorry, I ran into an error. Please try again.",
+        content: "Sorry 🙏, I ran into an error 😵‍💫. Please try again.",
         isLoading: false,
+        timestamp: aiResponseTime,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
