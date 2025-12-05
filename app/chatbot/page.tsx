@@ -150,10 +150,10 @@ const ChatWindow = () => {
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {/* Hello Message from bot */}
         <div>
-          <p className={`mb-0 underline text-gray-400 flex justify-start`}>
+          <p className={` mb-0 underline text-gray-400 flex justify-start`}>
             Sigma AI
           </p>
-          <div className="flex justify-start max-w-[70%] p-3 rounded-xl shadow-md my-2 whitespace-pre-wrap bg-[#2a2a2a] text-white mr-auto rounded-tl-none ">
+          <div className="flex justify-start max-w-[70%] md:max-w-[20%] p-3 rounded-xl shadow-md my-2 whitespace-pre-wrap bg-[#2a2a2a] text-white mr-auto rounded-tl-none ">
             Hey there 👋
             <br />
             Welcome to Sigma AI 🤖
@@ -227,7 +227,9 @@ const ChatWindow = () => {
           )}
         </form>
       </div>
-      <Footer/>
+      <span className="block md:hidden">
+        <Footer />
+      </span>
     </div>
   );
 };
