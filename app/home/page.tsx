@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa6";
 import Footer from "../components/Footer";
+import { FaSpinner } from "react-icons/fa";
 const page: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const gradientTextClass =
     "p-2 text-6xl md:text-7xl font-extrabold tracking-tight " +
     "bg-clip-text text-transparent mb-2 " +
@@ -15,6 +17,7 @@ const page: React.FC = () => {
 
   const router = useRouter();
   const handleStartChat = () => {
+    setIsLoading(true);
     router.push("/chatbot");
   };
 
@@ -75,6 +78,7 @@ const page: React.FC = () => {
         {/* Start Chat Button */}
         <motion.button
           onClick={handleStartChat}
+          disabled={isLoading}
           className={buttonClass + " text-white border-none cursor-pointer"}
           initial={{ scale: 1 }}
           whileHover={{ scale: 1.05 }}
@@ -83,7 +87,14 @@ const page: React.FC = () => {
             backgroundImage: "linear-gradient(45deg, #4F46E5, #9333EA)",
           }}
         >
-          Start Chat
+          {!isLoading ? (
+            <span className="flex gap-2 items-center">
+              <FaSpinner className="animate-spin" size={24} />
+              <span>Loading...</span>
+            </span>
+          ) : (
+            "Start Chat"
+          )}
         </motion.button>
       </div>
 
