@@ -87,7 +87,7 @@ const page: React.FC = () => {
             backgroundImage: "linear-gradient(45deg, #4F46E5, #9333EA)",
           }}
         >
-          {!isLoading ? (
+          {isLoading ? (
             <span className="flex gap-2 items-center">
               <FaSpinner className="animate-spin" size={24} />
               <span>Loading...</span>
