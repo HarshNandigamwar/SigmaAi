@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 import Header from "../components/Header";
 import MessageBox from "../components/MessageBox";
 import { useScrollToBottom } from "../util/useScrollToBottom";
+import Footer from "../components/Footer";
 
 export type Role = "user" | "model";
 export interface Message {
@@ -226,6 +227,7 @@ const ChatWindow = () => {
           )}
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };
