@@ -75,27 +75,29 @@ const page: React.FC = () => {
             <FaGithub size={30} />
           </motion.a>
         </div>
-        {/* Start Chat Button */}
-        <motion.button
-          onClick={handleStartChat}
-          disabled={isLoading}
-          className={buttonClass + " text-white border-none cursor-pointer"}
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95, y: 1, boxShadow: "0 0 0 0" }}
-          style={{
-            backgroundImage: "linear-gradient(45deg, #4F46E5, #9333EA)",
-          }}
-        >
-          {isLoading ? (
-            <span className="flex gap-2 items-center">
-              <FaSpinner className="animate-spin" size={24} />
-              <span>Loading...</span>
-            </span>
-          ) : (
-            "Start Chat"
-          )}
-        </motion.button>
+        <span className="flex flex-col gap-2 ">
+          {/* Start Chat Button */}
+          <motion.button
+            onClick={handleStartChat}
+            disabled={isLoading}
+            className={buttonClass + " text-white border-none cursor-pointer"}
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95, y: 1, boxShadow: "0 0 0 0" }}
+            style={{
+              backgroundImage: "linear-gradient(45deg, #4F46E5, #9333EA)",
+            }}
+          >
+            {isLoading ? (
+              <span className="flex gap-2 items-center justify-center">
+                <FaSpinner className="animate-spin" size={24} />
+                <span>Loading...</span>
+              </span>
+            ) : (
+              "Start Chat"
+            )}
+          </motion.button>
+        </span>
       </div>
 
       {/* Footer   */}
