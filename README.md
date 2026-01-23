@@ -9,7 +9,7 @@ A powerful, multimodal AI chat application built with modern web technologies, e
 - **Real-time Interaction**: Fast and responsive conversations powered by the **Gemini API**.
 - **Contextual History**: Maintains full dialogue context for smooth, continuous interactions.
 - **Formatted Timestamps**: Automatically formats timestamps to `YYYY-MM-DD HH:MM AM/PM`.
-- **Loading State**: Displays a clear loader while AI processes the request.
+- **Loading State**: Displays a clear loader while AI processes the request. 
 
 ---
 
