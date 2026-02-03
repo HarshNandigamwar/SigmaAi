@@ -227,9 +227,9 @@ const ChatWindow = () => {
           )}
         </form>
       </div>
-      <span className="block md:hidden">
+      {/* <span className="block md:hidden">
         <Footer />
-      </span>
+      </span> */}
     </div>
   );
 };

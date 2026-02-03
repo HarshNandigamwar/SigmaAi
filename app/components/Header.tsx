@@ -1,6 +1,6 @@
 const Header = () => {
   const gradientTextClass =
-    "p-1 text-3xl md:text-4xl font-extrabold tracking-tight " +
+    "text-3xl md:text-4xl font-extrabold tracking-tight " +
     "bg-clip-text text-transparent mb-2 " +
     "bg-gradient-to-r from-blue-400 via-pink-400 to-indigo-600";
   return (
